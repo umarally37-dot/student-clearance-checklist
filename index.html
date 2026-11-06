@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Clearance Checklist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Student Clearance Checklist</h1>
+        <p>Track your clearance from each university office.</p>
+   </header>
+   <main>
+    <section id="summary">
+        <h2>Progress</h2>
+        <p id="percent-text">0% complete</p>
+        <progress id="progress-bar" value="0" max="100"></progress>
+        <p id="remaining-text"></p>
+    </section>
+    <section id="filters">
+        <h2>Filter</h2>
+        <label for="office-filter">Office</label>
+        <select id="office-filter">
+            <option value="all">All offices</option>
+            <option value="Registry">Registry</option>
+            <option value="Library">Library</option>
+            <option value="Finance">Finance</option>
+        </select>
+        <label for="status-filter">Status</label>
+        <select id="status-filter">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="complete">Complete</option>
+        </select>
+    </section>
+    <section id="checklist">
+        <h2>Requirements</h2>
+        <ul id="requirement-list"></ul>
+        <p id="empty-message" hidden>No requirements match your filter.</p>
+        </section>
+        <section id="add-section">
+            <h2>Add a requirement</h2>
+            <form id="add-form">
+                <label for="new-office">Office</label>
+                <select id="new-office" required>
+                    <option value="">Choose an office</option>
+                    <option value="Registry">Registry</option>
+                    <option value="Library">Library</option>
+                    <option value="Finance">Finance</option>
+                </select>
+                <label for="new-name">Requirement</label>
+                <input type="text" id="new-name" required>
+                <buttton type="submit">Add</buttton>                               
+            </form>
+            <p id="form-message" aria-live="polite"></p>
+        </section>
+   </main>
+    <footer>
+        <p>Student Clearance Checklist, 2026</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
