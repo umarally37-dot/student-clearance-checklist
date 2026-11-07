@@ -18,10 +18,32 @@ function showRequirements() {
         // 5. Create a new list item for each requirement
         const li = document.createElement("li");
         li.textContent = item.office + ": " + item.name + " (" + item.status + ")";
-        
-        // 6. Add the list item to the list
+
+        const button = document.createElement("button");
+        if (item.status === "pending") {
+        button.textContent = "Mark complete";
+     } else {
+        button.textContent = "Mark pending";
+     }
+     button.addEventListener("click", function () {
+        toggleStatus(item.id);
+     });
+
+     li.appendChild(button);
         list.appendChild(li);
     }
 }
-// 7. Call the function to show the requirements when the page loads
-showRequirements();
+function toggleStatus(id) {
+    // 6. Find the requirement with the given id and toggle its status
+    for (let i = 0; i < requirements.length; i++) {
+        if (requirements[i].id === id) {
+            if (requirements[i].status === "pending") {
+                requirements[i].status = "complete";
+            } else {
+                requirements[i].status = "pending";
+            }
+        }
+    }
+    // 7. Call the function to show the requirements when the page loads
+    showRequirements();
+}
