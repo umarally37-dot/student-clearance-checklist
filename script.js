@@ -14,8 +14,7 @@ const emptyMessage = document.getElementById("empty-message");
 let requirements = [
     { id: 1, office: "Library", name: "Return all borrowed books", status: "pending" },
     { id: 2, office: "Finance", name: "Clear all tuition fees", status: "complete" },
-    { id: 3, office: "Registry", name: "Submit final results form", status: "pending" },
-    {id: 4, office: "IT", name: "Return borrowed equipment", status: "complete" },
+    { id: 3, office: "Registry", name: "Submit final results form", status: "pending" },    
 ];
 
 function getFilteredRequirements() {
