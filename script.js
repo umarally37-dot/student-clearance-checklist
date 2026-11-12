@@ -12,9 +12,24 @@ const statusFilter = document.getElementById("status-filter");
 const emptyMessage = document.getElementById("empty-message");
 
 let requirements = [
-    { id: 1, office: "Library", name: "Return all borrowed books", status: "pending" },
-    { id: 2, office: "Finance", name: "Clear all tuition fees", status: "complete" },
-    { id: 3, office: "Registry", name: "Submit final results form", status: "pending" },    
+  {
+    id: 1,
+    office: "Library",
+    name: "Return all borrowed books",
+    status: "pending",
+  },
+  {
+    id: 2,
+    office: "Finance",
+    name: "Clear all tuition fees",
+    status: "complete",
+  },
+  {
+    id: 3,
+    office: "Registry",
+    name: "Submit final results form",
+    status: "pending",
+  },
 ];
 
 function getFilteredRequirements() {
@@ -27,7 +42,6 @@ function getFilteredRequirements() {
     return officeMatches && statusMatches;
   });
 }
-
 
 function updateSummary() {
   let completeCount = 0;
@@ -51,66 +65,66 @@ function updateSummary() {
     percent = Math.round((completeCount / total) * 100);
   }
 
-  percentText.textContent = percent + "% complete (" + completeCount + " of " + total + ")";
+  percentText.textContent =
+    percent + "% complete (" + completeCount + " of " + total + ")";
   progressBar.value = percent;
 
   if (total > 0 && completeCount === total) {
     remainingText.textContent = "All requirements cleared!";
   } else {
-    remainingText.textContent = (total - completeCount) + " remaining:";
+    remainingText.textContent = total - completeCount + " remaining:";
   }
-} 
+}
 
 function showRequirements() {
-    const visible = getFilteredRequirements();
-    list.innerHTML = "";
-    
-    for (let i = 0; i < visible.length; i++) {
-        const item = visible[i];       
-        
-        const li = document.createElement("li");
-        li.className = item.status;
+  const visible = getFilteredRequirements();
+  list.innerHTML = "";
+
+  for (let i = 0; i < visible.length; i++) {
+    const item = visible[i];
+
+    const li = document.createElement("li");
+    li.className = item.status;
 
     const text = document.createElement("span");
-      text.className = "text";
+    text.className = "text";
     text.textContent = item.office + ": " + item.name;
 
-  const badge = document.createElement("span");
-  badge.className = "badge";
-  badge.textContent = item.status;
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    badge.textContent = item.status;
 
-li.appendChild(text);
-li.appendChild(badge);
-        const button = document.createElement("button");
-        if (item.status === "pending") {
-        button.textContent = "Mark complete";
-     } else {
-        button.textContent = "Mark pending";
-     }
-     button.addEventListener("click", function () {
-        toggleStatus(item.id);
-     });
-
-     li.appendChild(button);
-        list.appendChild(li);
+    li.appendChild(text);
+    li.appendChild(badge);
+    const button = document.createElement("button");
+    if (item.status === "pending") {
+      button.textContent = "Mark complete";
+    } else {
+      button.textContent = "Mark pending";
     }
+    button.addEventListener("click", function () {
+      toggleStatus(item.id);
+    });
 
-    emptyMessage.hidden = visible.length !== 0;
-    updateSummary();
+    li.appendChild(button);
+    list.appendChild(li);
+  }
+
+  emptyMessage.hidden = visible.length !== 0;
+  updateSummary();
 }
 
 function toggleStatus(id) {
-    
-    for (let i = 0; i < requirements.length; i++) {
-        if (requirements[i].id === id) {
-            if (requirements[i].status === "pending") {
-                requirements[i].status = "complete";
-            } else {
-                requirements[i].status = "pending";
-            }
-        }
-    }   
-    showRequirements();
+  for (let i = 0; i < requirements.length; i++) {
+    if (requirements[i].id === id) {
+      if (requirements[i].status === "pending") {
+        requirements[i].status = "complete";
+      } else {
+        requirements[i].status = "pending";
+      }
+    }
+  }
+  showRequirements();
 }
 
 function showMessage(text, type) {
@@ -145,14 +159,24 @@ addForm.addEventListener("submit", function (event) {
   }
 
   for (let i = 0; i < requirements.length; i++) {
-    if (requirements[i].office === office &&
-        requirements[i].name.toLowerCase() === name.toLowerCase()) {
-      showMessage("That requirement already exists for " + office + ".", "error");
+    if (
+      requirements[i].office === office &&
+      requirements[i].name.toLowerCase() === name.toLowerCase()
+    ) {
+      showMessage(
+        "That requirement already exists for " + office + ".",
+        "error",
+      );
       return;
     }
   }
 
-  requirements.push({ id: nextId(), office: office, name: name, status: "pending" });
+  requirements.push({
+    id: nextId(),
+    office: office,
+    name: name,
+    status: "pending",
+  });
   addForm.reset();
   showMessage("Requirement added.", "success");
   showRequirements();
