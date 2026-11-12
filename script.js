@@ -69,8 +69,18 @@ function showRequirements() {
         const item = visible[i];       
         
         const li = document.createElement("li");
-        li.textContent = item.office + ": " + item.name + " (" + item.status + ")";
+        li.className = item.status;
 
+    const text = document.createElement("span");
+      text.className = "text";
+    text.textContent = item.office + ": " + item.name;
+
+  const badge = document.createElement("span");
+  badge.className = "badge";
+  badge.textContent = item.status;
+
+li.appendChild(text);
+li.appendChild(badge);
         const button = document.createElement("button");
         if (item.status === "pending") {
         button.textContent = "Mark complete";
