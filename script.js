@@ -86,6 +86,7 @@ function showRequirements() {
     emptyMessage.hidden = visible.length !== 0;
     updateSummary();
 }
+
 function toggleStatus(id) {
     
     for (let i = 0; i < requirements.length; i++) {
