@@ -1,4 +1,7 @@
-
+const addForm = document.getElementById("add-form");
+const newOffice = document.getElementById("new-office");
+const newName = document.getElementById("new-name");
+const formMessage = document.getElementById("form-message");
 const list = document.getElementById("requirement-list");
 const percentText = document.getElementById("percent-text");
 const progressBar = document.getElementById("progress-bar");
@@ -100,6 +103,51 @@ function toggleStatus(id) {
     }   
     showRequirements();
 }
+
+function showMessage(text, type) {
+  formMessage.textContent = text;
+  formMessage.className = type;
+}
+
+function nextId() {
+  let highest = 0;
+  for (let i = 0; i < requirements.length; i++) {
+    if (requirements[i].id > highest) {
+      highest = requirements[i].id;
+    }
+  }
+  return highest + 1;
+}
+
+addForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const office = newOffice.value;
+  const name = newName.value.trim();
+
+  if (office === "") {
+    showMessage("Please choose an office.", "error");
+    return;
+  }
+
+  if (name.length < 3) {
+    showMessage("The requirement must be at least 3 characters.", "error");
+    return;
+  }
+
+  for (let i = 0; i < requirements.length; i++) {
+    if (requirements[i].office === office &&
+        requirements[i].name.toLowerCase() === name.toLowerCase()) {
+      showMessage("That requirement already exists for " + office + ".", "error");
+      return;
+    }
+  }
+
+  requirements.push({ id: nextId(), office: office, name: name, status: "pending" });
+  addForm.reset();
+  showMessage("Requirement added.", "success");
+  showRequirements();
+});
 officeFilter.addEventListener("change", showRequirements);
 statusFilter.addEventListener("change", showRequirements);
 showRequirements();
