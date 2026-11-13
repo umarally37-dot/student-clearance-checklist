@@ -1,0 +1,66 @@
+
+/* ===== 1. Base styles ===== */
+
+/* Padding and border are counted inside the width (Day 2) */
+* {
+  box-sizing: border-box;
+} 
+
+/* Colours are saved once here, so I can change one and the whole page follows */
+:root {
+  --dark: #0d2b33;
+  --teal: #127c8a;
+  --teal-dark: #0c5c67;
+  --background: #eef3f5;
+  --border: #d3dfe3;
+  --grey-text: #4b6670;
+  --green: #1e7a46;
+  --green-light: #e2f4e9;
+  --orange: #b86f00;
+  --orange-light: #fff2d9;
+  --red: #b3261e;
+  --red-light: #fdebea;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--dark);
+  line-height: 1.5;
+}
+
+/* hidden elements must really stay hidden (the empty message uses this) */
+[hidden] {
+  display: none;
+}
+
+/* ===== 2. Header and footer ===== */
+
+header {
+  background-color: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 32px 20px;
+}
+
+header h1 {
+  margin: 0 0 6px 0;
+  font-size: 32px;
+}
+
+header p {
+  margin: 0;
+  color: #9fc0c8;
+}
+
+footer {
+  text-align: center;
+  color: var(--grey-text);
+  padding: 20px;
+  font-size: 14px;
+}
+
+footer p {
+  margin: 0;
+}
